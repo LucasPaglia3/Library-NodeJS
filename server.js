@@ -1,7 +1,17 @@
-const express = require('express');
+const express = require('express'); // Agrega las dependencias de express.
+const libraryRoute = require('./routes/libraryRoute'); // Incluye la ruta para la libreria.
 
 const port = 5000;
 
-const app = express();
+const app = express(); // Instanciamos la app.
 
-app.listen(port);
+// Middlewares
+app.use(express.json());
+
+// Routes
+app.use('/library', libraryRoute); // Usamos la ruta en '/library'
+
+
+app.listen(port, () => { // Levantamos el sv.
+    console.log(`Server running on port: ${port}`);
+});
