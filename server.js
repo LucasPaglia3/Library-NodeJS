@@ -1,5 +1,5 @@
 const express = require('express'); // Agrega las dependencias de express.
-const libraryRoute = require('./routes/libraryRoute'); // Incluye la ruta para la libreria.
+const { libraryRoute } = require('./routes'); // Incluye la ruta para la libreria.
 
 const port = 5000;
 

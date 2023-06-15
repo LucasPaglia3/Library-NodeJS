@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { libraryController } = require('../controllers');
 
-router.route('/').get((req, res) => {
-    res.json({ message: 'Get all libraries'});
-});
+router.route('/').get( libraryController.getLibraryController );
 
 router.route('/:id').get((req, res) => {
     res.json({ message: `Get library with ID: ${req.params.id}`});
