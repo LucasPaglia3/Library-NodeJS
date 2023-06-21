@@ -1,3 +1,4 @@
 const libraryRoute = require('./libraryRoute');
+const userRoute = require('./userRoute');
 
-module.exports = { libraryRoute };
+module.exports = { libraryRoute, userRoute };

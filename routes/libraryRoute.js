@@ -8,9 +8,7 @@ router.route('/:id').get((req, res) => {
     res.json({ message: `Get library with ID: ${req.params.id}`});
 });
 
-router.route('/').post((req, res) => {
-    res.json({ message: 'Create library'});
-});
+router.route('/:libraryId').post( libraryController.createLibraryController );
 
 router.route('/:id').put((req, res) => {
     res.json({ message: `Update library with ID: ${req.params.id}`});
