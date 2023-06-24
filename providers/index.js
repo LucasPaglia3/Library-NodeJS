@@ -1,3 +1,4 @@
-const userProvider = require('./user');
+const userProvider = require('./userProvider');
+const libraryProvider = require('./libraryProvider');
 
-module.exports = { userProvider };
+module.exports = { userProvider, libraryProvider };

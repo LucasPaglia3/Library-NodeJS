@@ -2,19 +2,17 @@ const express = require('express');
 const router = express.Router();
 const { libraryController } = require('../controllers');
 
-router.route('/').get( libraryController.getLibraryController );
+router.get('/', libraryController.getAllLibraries ); // Obtener todas las biblioteca
 
-router.route('/:id').get((req, res) => {
-    res.json({ message: `Get library with ID: ${req.params.id}`});
-});
+router.get('/:libraryid', libraryController.getLibrary );// Obtener una biblioteca especifica
 
-router.route('/:libraryId').post( libraryController.createLibraryController );
+router.post('/:libraryid/book', libraryController.createBook ); // Crear un libro que pertenece a una biblioteca
 
-router.route('/:id').put((req, res) => {
+router.put('/:id', (req, res) => { // Actualizar una biblioteca por id
     res.json({ message: `Update library with ID: ${req.params.id}`});
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/:id').delete((req, res) => { // Eliminar una biblioteca por id
     res.json({ message: `Delete library with ID: ${req.params.id}`});
 });
 
