@@ -8,7 +8,7 @@ const Book = sequelize.define('Books', {
         autoIncrement: true,
     },
     isbn: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     title: {
@@ -23,10 +23,10 @@ const Book = sequelize.define('Books', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    libraryid: {
+    /*libraryid: {
         type: DataTypes.INTEGER,
         allowNull: true, // Puede no pertenecer a una biblioteca.
-    },
+    },*/
 });
 
 module.exports = Book;

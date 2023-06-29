@@ -13,7 +13,7 @@ const createLibrary = async (library) => {
 
 const createBook = async (libraryId, book) => {
     try {
-        const newBook = await bookModel.create( {...book, libraryid: libraryId} );
+        const newBook = await bookModel.create( { ...book, LibraryId: libraryId } );
         return newBook;
     } catch(error) {
         console.error('Could not create a new book', error);
@@ -33,7 +33,7 @@ const getLibrary = async (libraryid) => {
 
 const getAllLibraries = async() => {
     try {
-        const libraries = await libraryModel.findAll();
+        const libraries = await libraryModel.findAll({ include: { all: true }});
         return libraries;
     } catch(error) {
         console.error('Could not get libraries!');
