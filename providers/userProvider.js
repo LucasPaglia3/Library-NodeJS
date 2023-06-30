@@ -22,11 +22,21 @@ const getUser = async (userId) => {
     }
 }
 
+const getAllUsers = async () => {
+    try {
+        const users = await userModel.findAll({ include: { all: true }});
+        return users;
+    } catch(error) {
+        console.error('Could not get user!');
+        throw error;
+    }
+}
+
 const validateUser = async (options) => {
     try {
         const userFound = await User.findAll({ // Busca entre todos los Users, al que coincida con las options que se le pasó.
             where: {
-                    email: options.user,
+                    user: options.user,
                     password: options.pass,
             },
         });
@@ -40,4 +50,4 @@ const validateUser = async (options) => {
     }
 }
 
-module.exports = { createUser, getUser, validateUser };
+module.exports = { createUser, getUser, getAllUsers, validateUser };

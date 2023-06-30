@@ -23,10 +23,14 @@ const Book = sequelize.define('Books', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    /*libraryid: {
+    libraryId: {
         type: DataTypes.INTEGER,
         allowNull: true, // Puede no pertenecer a una biblioteca.
-    },*/
+    },
+},
+{
+    paranoid: true,
+    timestamps: true,
 });
 
 module.exports = Book;

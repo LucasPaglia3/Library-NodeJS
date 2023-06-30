@@ -28,8 +28,8 @@ const Library = sequelize.define('Libraries', {
 
 
 
-Library.hasMany(Book);
+Library.hasMany(Book, { foreignKey: 'libraryId' });
 
-Book.belongsTo(Library);
+Book.belongsTo(Library, { foreignKey: 'libraryId' });
 
 module.exports = Library;

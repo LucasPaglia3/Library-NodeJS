@@ -11,9 +11,13 @@ const createLibrary = async (library) => {
     };
 };
 
-const createBook = async (libraryId, book) => {
+const createBook = async (libraryid, book) => {
     try {
-        const newBook = await bookModel.create( { ...book, LibraryId: libraryId } );
+        const newBook = await bookModel.create( { ...book, libraryId: libraryid } );
+       /*if(newBook) {
+            newBook.library = libraryid;
+            await newBook.save();
+        }*/
         return newBook;
     } catch(error) {
         console.error('Could not create a new book', error);

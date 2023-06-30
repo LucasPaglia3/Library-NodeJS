@@ -13,6 +13,15 @@ const getUser = async (req, res) => {
     };
 };
 
+const getAllUsers = async (req, res) => { 
+    const users = await userService.getAllUsers();
+    if(!users) {
+        res.status(404).json( { action: 'getAllUsers', message: 'No users found!'});
+    } else {
+        res.json(users);
+    }
+};
+
 const createUser = async (req, res) => {
     try {
         const newUser = await userService.createUser(req.body);
@@ -22,4 +31,4 @@ const createUser = async (req, res) => {
     };
 }
 
-module.exports = { getUser, createUser };
+module.exports = { getUser, createUser, getAllUsers };
