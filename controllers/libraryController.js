@@ -20,7 +20,7 @@ const getLibrary = async (req, res) => {
     } catch(error) {
         res.status(500).json({ action: 'getLibrary', error: error.message });
     }
-}
+};
 
 const createLibrary = async (req, res) => {
     try {
@@ -29,7 +29,7 @@ const createLibrary = async (req, res) => {
     } catch (error) {
         res.status(500).json({ action: 'createLibrary', error: error.message });
     }
-}
+};
 
 const createBook = async (req, res) => {
     try {
@@ -42,6 +42,32 @@ const createBook = async (req, res) => {
     } catch(error) {
         res.status(500).json({ action: 'createBook', error: error.message });
     }
+};
+
+const updateLibrary = async (req, res) => {
+    try {
+        const library = libraryService.updateLibrary(req.params.libraryid, req.body);
+        if(!library) {
+            res.status(404).json({ action: 'updateLibrary', error: 'Library does not exist!'});
+        } else {
+            res.json(library);
+        }
+    } catch(error) {
+        res.status(500).json({ action: 'updateLibrary', error: error.message });
+    }
+};
+
+const deleteLibrary = async (req, res) => {
+    try {
+        const library = libraryService.deleteLibrary(req.params.libraryid);
+        if(!library) {
+            res.status(404).json({ action: 'deleteLibrary', error: 'Library does not exist!'});
+        } else {
+            res.json(library);
+        }
+    } catch( error ){
+        res.status(500).json({ action: 'deleteLibrary', error: error.message });
+    }
 }
 
-module.exports = { getLibrary, getAllLibraries, createLibrary, createBook };
+module.exports = { getLibrary, getAllLibraries, createLibrary, createBook, updateLibrary, deleteLibrary };

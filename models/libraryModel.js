@@ -19,8 +19,14 @@ const Library = sequelize.define('Libraries', {
     telephone: {
         type: DataTypes.STRING,
         allowNull: false,
-    },  
+    },
+}, 
+{
+    paranoid: true,
+    timestamps: true,
 });
+
+
 
 Library.hasMany(Book);
 

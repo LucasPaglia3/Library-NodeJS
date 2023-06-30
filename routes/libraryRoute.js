@@ -1,22 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { libraryController } = require('../controllers');
-const { jwtValidMDW } = require('../middlewares/auth-mdw')
+const { userIsAdminMdw } = require('../middlewares/auth-mdw')
 
 router.get('/', libraryController.getAllLibraries ); // Obtener todas las biblioteca
 
 router.get('/:libraryid', libraryController.getLibrary );// Obtener una biblioteca especifica
 
-router.post('/', jwtValidMDW, libraryController.createLibrary ); // Crear una biblioteca
+router.post('/', userIsAdminMdw, libraryController.createLibrary ); // Crear una biblioteca
 
-router.post('/:libraryid/book', libraryController.createBook ); // Crear un libro que pertenece a una biblioteca
+router.post('/:libraryid/book', userIsAdminMdw, libraryController.createBook ); // Crear un libro que pertenece a una biblioteca
 
-router.put('/:id', (req, res) => { // Actualizar una biblioteca por id
-    res.json({ message: `Update library with ID: ${req.params.id}`});
-});
+router.put('/:libraryid', userIsAdminMdw, libraryController.updateLibrary ); // Modificar una biblioteca
 
-router.route('/:id').delete((req, res) => { // Eliminar una biblioteca por id
-    res.json({ message: `Delete library with ID: ${req.params.id}`});
-});
+router.delete('/:libraryid', userIsAdminMdw, libraryController.deleteLibrary ); // Elimina una biblioteca
 
 module.exports = router;

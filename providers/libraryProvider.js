@@ -26,7 +26,7 @@ const getLibrary = async (libraryid) => {
         const library = await libraryModel.findByPk(libraryid, { include: { all: true }});
         return library;
     } catch(error) {
-        console.error('Could not get library!');
+        console.error('Could not get library!', error);
         throw error;
     };
 };
@@ -36,8 +36,35 @@ const getAllLibraries = async() => {
         const libraries = await libraryModel.findAll({ include: { all: true }});
         return libraries;
     } catch(error) {
-        console.error('Could not get libraries!');
+        console.error('Could not get libraries!', error);
+        throw error;
     };
 };
 
-module.exports = { createLibrary, getLibrary, getAllLibraries, createBook };
+const updateLibrary = async (libraryid, libraryUpd) => {
+    try {       
+        const library = await libraryModel.findByPk(libraryid);
+            if(library) {
+                library.name = libraryUpd.name;
+                library.location = libraryUpd.location;
+                library.telephone = libraryUpd.telephone;
+                await library.save();
+            }
+    } catch (error) {
+        console.error('Could not update library!', error);
+        throw error;
+    }
+};
+
+const deleteLibrary = async (libraryid) => {
+    try {
+        const library = await libraryModel.findByPk(libraryid);
+        if(library) {
+            await library.destroy({where: {id: libraryid}});
+        }
+    } catch(error) {
+        console.error('Could not delete library!', error);
+    }
+};
+
+module.exports = { createLibrary, getLibrary, getAllLibraries, createBook, updateLibrary, deleteLibrary };

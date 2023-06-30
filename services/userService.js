@@ -8,4 +8,9 @@ const getUser = async (userId) => {
     return await userProvider.getUser(userId);
 };
 
-module.exports = { createUser, getUser };
+const validateUser = async (user, pass) => {
+    const userFound = await userProvider.validateUser({ user, pass });
+    return userFound;
+}
+
+module.exports = { createUser, getUser, validateUser };
