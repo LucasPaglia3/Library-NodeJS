@@ -65,6 +65,7 @@ const deleteLibrary = async (libraryid) => {
         const library = await libraryModel.findByPk(libraryid);
         if(library) {
             await library.destroy({where: {id: libraryid}});
+            await bookModel.update({libraryId: null}, {where: {libraryId: libraryid}}); // actualiza los libros dentro de la libreria para cambiar su libraryId a null.
         }
     } catch(error) {
         console.error('Could not delete library!', error);
